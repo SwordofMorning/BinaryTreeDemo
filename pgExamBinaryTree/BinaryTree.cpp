@@ -47,7 +47,6 @@ bool BinaryTree<elemType>::Create_pre(std::string::const_iterator& it, Node*& no
 	return true;
 }
 
-
 /* ===== Function 02 : 先序遍历 ===== */
 template<typename elemType>
 void BinaryTree<elemType>::Traverse_pre()
@@ -69,5 +68,39 @@ void BinaryTree<elemType>::Traverse_pre(Node* node)
 template<typename elemType>
 void BinaryTree<elemType>::Visit(Node* node)
 {
-	std::cout << node->element << std::endl;
+	std::cout << node->element;
+}
+
+/* ===== Function 04 : 中序遍历 ===== */
+template<typename elemType>
+void BinaryTree<elemType>::Traverse_in()
+{
+	this->Traverse_in(root);
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::Traverse_in(Node* node)
+{
+	if (!node) return;
+
+	this->Traverse_pre(node->left);
+	this->Visit(node);
+	this->Traverse_pre(node->right);
+}
+
+/* ===== Function 05 : 后序遍历 ===== */
+template<typename elemType>
+void BinaryTree<elemType>::Traverse_pos()
+{
+	this->Traverse_pos(root);
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::Traverse_pos(Node* node)
+{
+	if (!node) return;
+
+	this->Traverse_pre(node->left);
+	this->Traverse_pre(node->right);
+	this->Visit(node);
 }

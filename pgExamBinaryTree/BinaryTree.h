@@ -32,6 +32,12 @@ private:
 	/* ===== Function 03 : 访问当前节点 ===== */
 	void Visit(Node* node);
 
+	/* ===== Function 04 : 中序遍历 ===== */
+	void Traverse_in(Node* node);
+
+	/* ===== Function 05 : 后序遍历 ===== */
+	void Traverse_pos(Node* node);
+
 public:
 	/* ===== Function 00 : Constructor ===== */
 	BinaryTree();
@@ -43,6 +49,10 @@ public:
 	/* ===== Function 02 : 先序遍历 ===== */
 	void Traverse_pre();
 
-	
+	/* ===== Function 04 : 中序遍历 ===== */
+	void Traverse_in();
+
+	/* ===== Function 05 : 后序遍历 ===== */
+	void Traverse_pos();
 };
 
