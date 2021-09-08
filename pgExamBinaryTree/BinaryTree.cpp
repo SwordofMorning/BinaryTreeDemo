@@ -76,9 +76,9 @@ void BinaryTree<elemType>::Traverse_in(Node<elemType>* node)
 {
 	if (!node) return;
 
-	this->Traverse_pre(node->left);
+	this->Traverse_in(node->left);
 	this->Visit(node);
-	this->Traverse_pre(node->right);
+	this->Traverse_in(node->right);
 }
 
 /* ===== Function 05 : 后序遍历 ===== */
@@ -93,8 +93,8 @@ void BinaryTree<elemType>::Traverse_pos(Node<elemType>* node)
 {
 	if (!node) return;
 
-	this->Traverse_pre(node->left);
-	this->Traverse_pre(node->right);
+	this->Traverse_pos(node->left);
+	this->Traverse_pos(node->right);
 	this->Visit(node);
 }
 
@@ -151,5 +151,58 @@ void BinaryTree<elemType>::Insert(const elemType& ele, Node<elemType>*& node)
 	else if (node->element < ele)
 	{
 		this->Insert(ele, node->right);
+	}
+}
+
+/* ===== Function 08 : 查找最小值 ===== */
+template<typename elemType>
+BinaryTree<elemType>::Node<elemType>* BinaryTree<elemType>::FindMin(Node<elemType>* node)
+{
+	if (!node) return nullptr;
+
+	if (!node->left) return node;
+	
+	return FindMin(node->left);
+}
+
+/* ===== Function 09 : 查找最大值 ===== */
+template<typename elemType>
+BinaryTree<elemType>::Node<elemType>* BinaryTree<elemType>::FindMax(Node<elemType>* node)
+{
+	if (!node) return nullptr;
+
+	if (!node->right) return node;
+
+	return FindMax(node->right);
+}
+
+/* ===== Function 010 : 按元素删除 ===== */
+template<typename elemType>
+void BinaryTree<elemType>::Remove_val(const elemType& ele)
+{
+	this->Remove_val(ele, root);
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::Remove_val(const elemType& ele, Node<elemType>*& node)
+{
+	if (!node) return;
+
+	if (ele < node->element)
+		this->Remove_val(ele, node->left);
+	else if (ele > node->element)
+		this->Remove_val(ele, node->left);
+	else if (node->left && node->right)		// 被删除目标有两个节点
+	{
+		node->element = this->FindMin(node->right)->element;
+		Remove_val(node->element, node->right);
+	}
+	else									// 被删除目标只有一个节点或无节点
+	{
+		Node<elemType>* oldOne = node;
+		node = (node->left) ?
+			node->left :
+			node->right;
+		delete oldOne;
 	}
 }

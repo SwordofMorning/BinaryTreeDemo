@@ -4,6 +4,8 @@
 
 int main()
 {
+	// BT
+
 	BinaryTree<char> Tree_Char;
 
 	Tree_Char.Create_pre("AB##C##");
@@ -15,6 +17,8 @@ int main()
 	std::cout << std::endl;
 
 	std::cout << Tree_Char.FindVal('A') << std::endl;
+
+	// BST
 
 	BinaryTree<int> Tree_Int;
 
@@ -32,6 +36,9 @@ int main()
 	Tree_Int.Traverse_pos();
 	std::cout << std::endl;
 
+	Tree_Int.Remove_val(5);
+	Tree_Int.Traverse_in();
+	std::cout << std::endl;
 
 
 	return 0;

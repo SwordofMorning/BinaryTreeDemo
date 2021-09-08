@@ -46,6 +46,15 @@ private:
 	/* ===== Function 07 : 插入（线索二叉树，按准则排序，此处用<） ===== */
 	void Insert(const elemType& ele, Node<elemType>*& node);
 
+	/* ===== Function 08 : 查找最小值 ===== */
+	Node<elemType>* FindMin(Node<elemType>* node);
+
+	/* ===== Function 09 : 查找最大值 ===== */
+	Node<elemType>* FindMax(Node<elemType>* node);
+
+	/* ===== Function 10 : 按元素删除 ===== */
+	void Remove_val(const elemType& ele, Node<elemType>*& node);
+
 public:
 	/* ===== Function 00 : Constructor ===== */
 	BinaryTree();
@@ -69,5 +78,6 @@ public:
 	/* ===== Function 07 : 插入（线索二叉树，按准则排序，此处用<） ===== */
 	void Insert(const elemType& ele);
 
+	/* ===== Function 10 : 按元素删除 ===== */
+	void Remove_val(const elemType& ele);
 };
-
