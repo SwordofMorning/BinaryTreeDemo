@@ -43,6 +43,9 @@ private:
 	/* ===== Function 06 : 按值查找 ===== */
 	Node<elemType>* FindVal(const elemType& ele, Node<elemType>* node);
 
+	/* ===== Function 07 : 插入（线索二叉树，按准则排序，此处用<） ===== */
+	void Insert(const elemType& ele, Node<elemType>*& node);
+
 public:
 	/* ===== Function 00 : Constructor ===== */
 	BinaryTree();
@@ -62,5 +65,9 @@ public:
 
 	/* ===== Function 06 : 按值查找 ===== */
 	Node<elemType>* FindVal(const elemType& ele);
+
+	/* ===== Function 07 : 插入（线索二叉树，按准则排序，此处用<） ===== */
+	void Insert(const elemType& ele);
+
 };
 

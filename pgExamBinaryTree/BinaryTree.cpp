@@ -1,7 +1,6 @@
 #include "BinaryTree.h"
 
 /* ===== Function 00 : Constructor ===== */
-/* ===== 二叉树构造函数 ===== */
 template<typename elemType>
 inline BinaryTree<elemType>::BinaryTree()
 {
@@ -33,12 +32,6 @@ bool BinaryTree<elemType>::Create_pre(std::string::const_iterator& it, Node<elem
 	else if (*it != '#')
 	{
 		node = new Node<elemType>(*it, nullptr, nullptr);
-
-		// 根的判断
-		if (!root)
-		{
-			root = node;
-		}
 
 		Create_pre(++it, node->left);
 		Create_pre(++it, node->right);
@@ -135,4 +128,28 @@ BinaryTree<elemType>::Node<elemType>* BinaryTree<elemType>::FindVal(const elemTy
 
 	// 无结果
 	return nullptr;
+}
+
+/* ===== Function 07 : 插入（线索二叉树，按准则排序，此处用<） ===== */
+template<typename elemType>
+void BinaryTree<elemType>::Insert(const elemType& ele)
+{
+	this->Insert(ele, root);
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::Insert(const elemType& ele, Node<elemType>*& node)
+{
+	if (!node)
+	{
+		node = new Node<elemType>(ele, nullptr, nullptr);
+	}
+	else if (ele < node->element)
+	{
+		this->Insert(ele, node->left);
+	}
+	else if (node->element < ele)
+	{
+		this->Insert(ele, node->right);
+	}
 }
