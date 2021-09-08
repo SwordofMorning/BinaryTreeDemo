@@ -6,8 +6,10 @@ class BinaryTree
 {
 private:
 	/* ===== Member 00 : 二叉树节点 ===== */
-	struct Node
+	template<typename elemType>
+	class Node
 	{
+	public:
 		elemType element;
 		Node* left;
 		Node* right;
@@ -21,22 +23,25 @@ private:
 	};
 
 	/* ===== Member 01 : 根节点 ===== */
-	Node* root;
+	Node<elemType>* root;
 
 	/* ===== Function 01 : 通过先序构造二叉树 ===== */
-	bool Create_pre(std::string::const_iterator& it, Node*& node);
+	bool Create_pre(std::string::const_iterator& it, Node<elemType>*& node);
 
 	/* ===== Function 02 : 先序遍历 ===== */
-	void Traverse_pre(Node* node);
+	void Traverse_pre(Node<elemType>* node);
 
 	/* ===== Function 03 : 访问当前节点 ===== */
-	void Visit(Node* node);
+	void Visit(Node<elemType>* node);
 
 	/* ===== Function 04 : 中序遍历 ===== */
-	void Traverse_in(Node* node);
+	void Traverse_in(Node<elemType>* node);
 
 	/* ===== Function 05 : 后序遍历 ===== */
-	void Traverse_pos(Node* node);
+	void Traverse_pos(Node<elemType>* node);
+
+	/* ===== Function 06 : 按值查找 ===== */
+	Node<elemType>* FindVal(const elemType& ele, Node<elemType>* node);
 
 public:
 	/* ===== Function 00 : Constructor ===== */
@@ -54,5 +59,8 @@ public:
 
 	/* ===== Function 05 : 后序遍历 ===== */
 	void Traverse_pos();
+
+	/* ===== Function 06 : 按值查找 ===== */
+	Node<elemType>* FindVal(const elemType& ele);
 };
 

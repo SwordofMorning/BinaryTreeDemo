@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "BinaryTree.h"
 #include "BinaryTree.cpp"
 
@@ -14,6 +13,9 @@ int main()
 	bt.Traverse_in();
 	std::cout << std::endl;
 	bt.Traverse_pos();
+	std::cout << std::endl;
+
+	std::cout << bt.FindVal('A') << std::endl;
 
 	return 0;
 }
