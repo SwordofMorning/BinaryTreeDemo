@@ -206,3 +206,62 @@ void BinaryTree<elemType>::Remove_val(const elemType& ele, Node<elemType>*& node
 		delete oldOne;
 	}
 }
+
+/* ===== Function 11 : 高度 ===== */
+template<typename elemType>
+int BinaryTree<elemType>::Height()
+{
+	return this->Height(root);
+}
+
+
+template<typename elemType>
+int BinaryTree<elemType>::Height(Node<elemType>* node)
+{
+	if (!node)	return 0;
+
+	return std::max(this->Height(node->left), this->Height(node->right)) + 1;
+}
+
+/* ===== Function 12 : 宽度 ===== */
+template<typename elemType>
+int BinaryTree<elemType>::Width()
+{
+	return this->Width(root);
+}
+
+template<typename elemType>
+int BinaryTree<elemType>::Width(Node<elemType>* node)
+{
+	if (!node)	return 0;
+
+	std::deque<Node<elemType>*> dq;
+	dq.push_back(node);
+
+	int maxWidth = 1;
+	int curentWidth = 1;
+
+	while (!dq.empty())
+	{
+		while (curentWidth > 0)
+		{
+			// 队首出队，将下一层压入队列
+			Node<elemType>* head = dq.front();
+			dq.pop_front();
+
+			if (head->left)	dq.push_back(head->left);
+			if (head->right) dq.push_back(head->right);
+
+			curentWidth--;
+		}
+
+		// 当前层的节点数
+		curentWidth = dq.size();
+
+		maxWidth = (maxWidth < curentWidth) ?
+			curentWidth :
+			maxWidth;
+	}
+
+	return maxWidth;
+}

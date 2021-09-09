@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <deque>
 
 template<typename elemType>
 class BinaryTree
@@ -55,6 +56,12 @@ private:
 	/* ===== Function 10 : 按元素删除 ===== */
 	void Remove_val(const elemType& ele, Node<elemType>*& node);
 
+	/* ===== Function 11 : 高度 ===== */
+	int Height(Node<elemType>* node);
+
+	/* ===== Function 12 : 宽度 ===== */
+	int Width(Node<elemType>* node);
+
 public:
 	/* ===== Function 00 : Constructor ===== */
 	BinaryTree();
@@ -80,4 +87,11 @@ public:
 
 	/* ===== Function 10 : 按元素删除 ===== */
 	void Remove_val(const elemType& ele);
+
+	/* ===== Function 11 : 高度 ===== */
+	int Height();
+
+	/* ===== Function 12 : 宽度 ===== */
+	int Width();
+
 };
