@@ -62,6 +62,15 @@ private:
 	/* ===== Function 12 : 宽度 ===== */
 	int Width(Node<elemType>* node);
 
+	/* ===== Function 13 : 完全二叉树的判定 ===== */
+	bool is_Complete(Node<elemType>* node);
+
+	/* ===== Function 14 : 二叉树旋转 ===== */
+	Node<elemType>* Mirror(Node<elemType>* node);
+
+	/* ===== Function 15 : 平衡二叉树 ===== */
+	bool is_Avl(Node<elemType>* node, int& height);
+
 public:
 	/* ===== Function 00 : Constructor ===== */
 	BinaryTree();
@@ -94,4 +103,12 @@ public:
 	/* ===== Function 12 : 宽度 ===== */
 	int Width();
 
+	/* ===== Function 13 : 完全二叉树的判定 ===== */
+	bool is_Complete();
+
+	/* ===== Function 14 : 二叉树旋转 ===== */
+	Node<elemType>* Mirror();
+
+	/* ===== Function 15 : 平衡二叉树 ===== */
+	bool is_Avl();
 };

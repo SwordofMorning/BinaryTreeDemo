@@ -239,11 +239,11 @@ int BinaryTree<elemType>::Width(Node<elemType>* node)
 	dq.push_back(node);
 
 	int maxWidth = 1;
-	int curentWidth = 1;
+	int currentWidth = 1;
 
 	while (!dq.empty())
 	{
-		while (curentWidth > 0)
+		while (currentWidth > 0)
 		{
 			// 队首出队，将下一层压入队列
 			Node<elemType>* head = dq.front();
@@ -252,16 +252,121 @@ int BinaryTree<elemType>::Width(Node<elemType>* node)
 			if (head->left)	dq.push_back(head->left);
 			if (head->right) dq.push_back(head->right);
 
-			curentWidth--;
+			currentWidth--;
 		}
 
-		// 当前层的节点数
-		curentWidth = dq.size();
+		// 下一层的节点数
+		currentWidth = dq.size();
 
-		maxWidth = (maxWidth < curentWidth) ?
-			curentWidth :
+		maxWidth = (maxWidth < currentWidth) ?
+			currentWidth :
 			maxWidth;
 	}
 
 	return maxWidth;
+}
+
+/* ===== Function 13 : 完全二叉树的判定 ===== */
+template<typename elemType>
+bool BinaryTree<elemType>::is_Complete()
+{
+	return this->is_Complete(root);
+}
+
+template<typename elemType>
+bool BinaryTree<elemType>::is_Complete(Node<elemType>* node)
+{
+	if (!node)	return false;
+
+	std::deque<Node<elemType>*> dq;
+	dq.push_back(node);
+
+	int currentWidth = 1;
+	int currentLevel = 0;
+
+	while (!dq.empty())
+	{
+		while (currentWidth > 0)
+		{
+			// 队首出队，将下一层压入队列
+			Node<elemType>* head = dq.front();
+			dq.pop_front();
+
+			if (head->left)	dq.push_back(head->left);
+			if (head->right) dq.push_back(head->right);
+
+			currentWidth--;
+		}
+
+		// 下一层的节点数
+		currentWidth = dq.size();
+		currentLevel++;
+
+		if ((currentWidth != pow(2, currentLevel))&& (currentWidth != 0))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/* ===== Function 14 : 二叉树旋转 ===== */
+template<typename elemType>
+BinaryTree<elemType>::Node<elemType>* BinaryTree<elemType>::Mirror()
+{
+	return this->Mirror(root);
+}
+
+template<typename elemType>
+BinaryTree<elemType>::Node<elemType>* BinaryTree<elemType>::Mirror(Node<elemType>* node)
+{
+	if (!node)	return nullptr;
+
+	Node<elemType>* lt = this->Mirror(node->left);
+	Node<elemType>* rt = this->Mirror(node->right);
+
+	node->left = rt;
+	node->right = lt;
+
+	return node;
+}
+
+/* ===== Function 15 : 平衡二叉树 ===== */
+template<typename elemType>
+bool BinaryTree<elemType>::is_Avl()
+{
+	int h = 0;
+	return this->is_Avl(root, h);
+}
+
+template<typename elemType>
+bool BinaryTree<elemType>::is_Avl(Node<elemType>* node, int& height)
+{
+	if (!node)
+	{
+		height = 0;
+		return true;
+	}
+
+	// left height
+	int lh(0);
+	// left flag
+	bool lf = this->is_Avl(node->left, lh);
+
+	// right
+	int rh(0);
+	bool rf = this->is_Avl(node->right, rh);
+
+	if (lf && rf && abs(lh - rh) <= 1)
+	{
+		height = std::max(lh, rh) + 1;
+	}
+	else
+	{
+		height = std::max(lh, rh) + 1;
+		return false;
+	}
+
+	return true;
 }
