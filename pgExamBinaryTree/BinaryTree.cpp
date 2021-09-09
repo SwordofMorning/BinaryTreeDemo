@@ -140,10 +140,12 @@ void BinaryTree<elemType>::Insert(const elemType& ele)
 template<typename elemType>
 void BinaryTree<elemType>::Insert(const elemType& ele, Node<elemType>*& node)
 {
+	// 有空位插
 	if (!node)
 	{
 		node = new Node<elemType>(ele, nullptr, nullptr);
 	}
+	// 这个空位有人了，和他比较下，按一定排序准则选择左右，这里以 < 为排序准则。
 	else if (ele < node->element)
 	{
 		this->Insert(ele, node->left);
@@ -188,13 +190,17 @@ void BinaryTree<elemType>::Remove_val(const elemType& ele, Node<elemType>*& node
 {
 	if (!node) return;
 
+	// 不是目标，比较
 	if (ele < node->element)
 		this->Remove_val(ele, node->left);
 	else if (ele > node->element)
 		this->Remove_val(ele, node->left);
+	// 找到目标
 	else if (node->left && node->right)		// 被删除目标有两个节点
 	{
+		// 可替换左子树的最大值、右子树的最小值（中序向量的两个点，选一）
 		node->element = this->FindMin(node->right)->element;
+		// 更新删除目标
 		Remove_val(node->element, node->right);
 	}
 	else									// 被删除目标只有一个节点或无节点
